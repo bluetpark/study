@@ -5,7 +5,94 @@
 <meta charset="utf-8">
 <title>exam</title>
 <link rel="stylesheet" href="common.css" />
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+	(function () {
+		$(document).ready(function () {
+
+			// exam1 (s)
+			var $exam1 = $('.exam_wrap').eq(0),
+				$exam1item = $exam1.find('ul li'),
+				itemLen1 = $exam1item.length - 1,
+				nCount1 = 0;
+
+			$exam1.find('button').on('click', function () {
+				if ( nCount1 <= itemLen1 ) {
+					$exam1item.eq(nCount1).css('background-color','lime');
+					nCount1++;
+				}
+			});
+			// exam1 (e)
+
+			// exam2 (s)
+			var $exam2 = $('.exam_wrap').eq(1),
+				$exam2item = $exam2.find('ul li'),
+				itemLen2 = $exam2item.length - 1,
+				nCount2 = itemLen2;
+
+			$exam2.find('button').on('click', function () {
+				if ( nCount2 >= 0 ) {
+					$exam2item.eq(nCount2).css('background-color','lime');
+					nCount2--;
+				}
+			});
+			// exam2 (e)
+
+			// exam3 (s)
+			var $exam3 = $('.exam_wrap').eq(2),
+				$exam3item = $exam3.find('ul li'),
+				itemLen3 = $exam3item.length - 1,
+				nCount3 = $exam3.find('[style]').index(),
+				$exam3prev = $exam3.find('button.prev'),
+				$exam3next = $exam3.find('button.next');
+
+			$exam3next.on('click', function () {
+				if ( nCount3 < itemLen3 ) {
+					$exam3item.eq(nCount3).removeAttr('style').next('li').css('background-color','lime');
+					nCount3++;
+				}
+			});
+
+			$exam3prev.on('click', function () {
+				if ( nCount3 > 0 ) {
+					$exam3item.eq(nCount3).removeAttr('style').prev('li').css('background-color','lime');
+					nCount3--;
+				}
+			});
+			// exam3 (e)
+
+			// exam4 (s)
+			var $exam4 = $('.exam_wrap').eq(3),
+				$exam4item = $exam4.find('ul li'),
+				itemLen4 = $exam4item.length - 1,
+				nCount4 = $exam4.find('.active').index(),
+				$exam4prev = $exam4.find('button.prev'),
+				$exam4next = $exam4.find('button.next');
+
+			$exam4next.on('click', function () {
+				if ( nCount4 == itemLen4 ) {
+					$exam4item.eq(nCount4).removeClass('active').siblings('li:eq(0)').addClass('active');
+					nCount4 = 0;
+				} else {
+					$exam4item.eq(nCount4).removeClass('active').next('li').addClass('active');
+					nCount4++;
+				}
+			});
+
+			$exam4prev.on('click', function () {
+				if ( nCount4 == 0 ) {
+					$exam4item.eq(nCount4).removeClass('active').siblings('li:eq(-1)').addClass('active');
+					nCount4 = itemLen4;
+				} else {
+					$exam4item.eq(nCount4).removeClass('active').prev('li').addClass('active');
+					nCount4--;
+				}
+			});
+			// exam4 (e)
+
+		});
+	})();
+</script>
 </head>
 <body>
 <!-- wrapper [s] -->
@@ -52,7 +139,7 @@
 			<h1>Q. 첫번째부터 순서대로 선택하고, 전에 선택했던 Element의 배경색을 지우세요 (style 제어)</h1>
 			<div class="exam_q"><!-- 부모 -->
 				<ul>
-					<li style="background-color:yellow">one</li>
+					<li style="background-color:lime">one</li>
 					<li>two</li>
 					<li>three</li>
 					<li>four</li>
@@ -63,8 +150,8 @@
 					<li>nine</li>
 				</ul>
 			</div>
-			<button type="button">이전</button>
-			<button type="button">다음</button>
+			<button type="button" class="prev">이전</button>
+			<button type="button" class="next">다음</button>
 		</div>
         <div class="exam_wrap">
             <h1>Q. 첫번째부터 순서대로 선택하고, 전에 선택했던 Element의 배경색을 지우시고, 무한loop 돌게 하세요 (클래스 제어)</h1>
@@ -81,8 +168,8 @@
                     <li>nine</li>
                 </ul>
             </div>
-            <button type="button">이전</button>
-            <button type="button">다음</button>
+            <button type="button" class="prev">이전</button>
+            <button type="button" class="next">다음</button>
         </div>
 	</div>
 	<!-- container [e] -->
