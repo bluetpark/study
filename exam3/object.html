@@ -96,15 +96,14 @@
 			obj7arr.push(str[i]);
 		}
 		obj7arr.sort();
-		console.log(obj7arr);
 		for (var i = 0, max = str.length; i < max; i++) {
-			if ( obj7[obj7arr[i]] == undefined) {
-			// if ( obj7.hasOwnProperty(obj7[obj7arr[i]]) ) {
-				obj7[obj7arr[i]] += 1;
-			} else {
+			if ( obj7.hasOwnProperty(obj7arr[i]) == false ) {
 				obj7[obj7arr[i]] = 1;
+			} else {
+				obj7[obj7arr[i]] += 1;
 			}
 		}
+		console.log( '/* exam7 */' );
 		console.log(obj7);
 	});
 })();
