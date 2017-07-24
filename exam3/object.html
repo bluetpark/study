@@ -5,7 +5,110 @@
 <meta charset="utf-8">
 <title>exam</title>
 <link rel="stylesheet" href="common.css" />
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+(function () {
+	$(document).ready(function () {
+
+		// exam1
+		var obj1 = function () {
+			console.log(this);
+		}
+		console.log('/* exam1 */');
+		obj1();
+		new obj1();
+
+		// exam2
+		var obj2 = {
+			init : function () {
+				console.log(this);
+			}
+		};
+		console.log('/* exam2 */');
+		obj2.init();
+
+		// exam3
+		var obj3 = {
+			init : function () {
+				// setElements 함수를 호출해봐요~
+				this.setElements();
+			},
+			setElements : function () {
+				console.log('/* exam3 */\ncall obj3 setElements');
+			}
+		}
+		obj3.init();
+
+		// exam4
+		var obj4 = {
+			init : function () {
+				// 객체 obj2 의 init 을 호출해봐요~
+				obj4_2.init();
+			}
+		};
+		var obj4_2 = {
+			init : function () {
+				console.log('/* exam4 */\ncall obj4_2');
+			}
+		};
+		obj4.init();
+
+		// exam5
+		var obj5 = {
+			func : function () {
+				console.log('func');
+			},
+			num : 3,
+			string : 'text',
+			array : [0, 1, 3],
+			object : {key : 'value'},
+			boolean : true
+		};
+		console.log('/* exam5 */')
+		console.log(obj5.func);
+		console.log(obj5.num);
+		console.log(obj5.string);
+		console.log(obj5.array);
+		console.log(obj5.object);
+		console.log(obj5.boolean);
+
+		// exam6
+		var obj6 = {
+			e : 'e',
+			d : 'd',
+			b : 'b',
+			g : 'g',
+			c : 'c',
+			f : 'f',
+			a : 'a'
+		};
+		var obj6arr = [];
+		for (var i in obj6) {
+			obj6arr.push(i);
+		}
+		console.log( '/* exam6 */\n' + obj6arr.sort().join('') );
+
+		// exam7
+		var str = 'bcaebe',
+			obj7arr = [],
+			obj7 = {};
+		for (var i = 0, max = str.length; i < max; i++) {
+			obj7arr.push(str[i]);
+		}
+		obj7arr.sort();
+		console.log(obj7arr);
+		for (var i = 0, max = str.length; i < max; i++) {
+			if ( obj7[obj7arr[i]] == undefined) {
+			// if ( obj7.hasOwnProperty(obj7[obj7arr[i]]) ) {
+				obj7[obj7arr[i]] += 1;
+			} else {
+				obj7[obj7arr[i]] = 1;
+			}
+		}
+		console.log(obj7);
+	});
+})();
+</script>
 </head>
 <body>
 <!-- wrapper [s] -->
@@ -25,6 +128,10 @@
 			};<br>
 			obj();<br>
 			// new obj();
+				<p class="exam_answer">
+					함수만을 호출한 경우 window 객체를 가리키고,<br>
+					new를 붙여 호출한 경우 함수 자신을 가리킨다.
+				</p>
 			</div>
 		</div>
 		<div class="exam_wrap">
@@ -36,6 +143,9 @@
 			&nbsp;&nbsp;&nbsp;}<br>
 			};<br>
 			obj.init();<br>
+				<p class="exam_answer">
+					객체 내에서 this는 객체 자신을 가리킨다.
+				</p>
 			</div>
 		</div>
 		<div class="exam_wrap">

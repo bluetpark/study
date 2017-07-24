@@ -5,7 +5,114 @@
 <meta charset="utf-8">
 <title>exam</title>
 <link rel="stylesheet" href="common.css" />
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+(function () {
+	$(document).ready(function () {
+		var exam7arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+		var arrayResult = {
+			init : function () {
+				this.setElements();
+				this.bindEvents();
+			},
+			setElements : function () {
+				this.examWrap1 = $('.exam_wrap').eq(0);
+				this.examWrap1Btn = this.examWrap1.find('button');
+				this.examWrap2 = $('.exam_wrap').eq(1);
+				this.examWrap2Btn = this.examWrap2.find('button');
+				this.examWrap3 = $('.exam_wrap').eq(2);
+				this.examWrap3Btn = this.examWrap3.find('button');
+				this.examWrap4 = $('.exam_wrap').eq(3);
+				this.examWrap4Btn = this.examWrap4.find('button');
+				this.examWrap5 = $('.exam_wrap').eq(4);
+				this.examWrap5Btn = this.examWrap5.find('button');
+				this.examWrap6 = $('.exam_wrap').eq(5);
+				this.examWrap6Btn = this.examWrap6.find('button');
+				this.examWrap7 = $('.exam_wrap').eq(6);
+				this.examWrap7Btn = this.examWrap7.find('button');
+				this.examWrap8 = $('.exam_wrap').eq(7);
+				this.examWrap8Btn = this.examWrap8.find('button');
+			},
+			bindEvents : function () {
+				this.examWrap1Btn.on('click', $.proxy(this.printName, this));
+				this.examWrap2Btn.on('click', $.proxy(this.reverseString, this));
+				this.examWrap3Btn.on('click', $.proxy(this.arrSort, this));
+				this.examWrap4Btn.on('click', $.proxy(this.gugudan, this));
+				this.examWrap5Btn.on('click', $.proxy(this.forPush, this));
+				this.examWrap6Btn.on('click', $.proxy(this.randomPush, this));
+				this.examWrap7Btn.on('click', $.proxy(this.randomSplice, this));
+				this.examWrap8Btn.on('click', $.proxy(this.randomPush2, this));
+			},
+			printName : function () {
+				var arrName = ['Park', 'Tae', 'Young'];
+				console.log( arrName.join(' ') );
+			},
+			reverseString : function () {
+				var sTemp = 'question',
+					sTempArr = [];
+				for (var i = 0, max = sTemp.length; i < max; i++) {
+					sTempArr.push(sTemp[i]);
+				}
+				console.log(sTempArr.reverse().join(''));
+			},
+			arrSort : function () {
+				var arrNum = [40, 100, 1, 5, 25, 10],
+					arrNumSort = [];
+				for (var i = 0, max = arrNum.length; i < max; i++) {
+					var nMax = Math.max.apply(0, arrNum),
+						nMaxIdx = arrNum.indexOf(nMax);
+					arrNumSort[nMaxIdx] = i;
+					arrNum[nMaxIdx] = null;
+				}
+				console.log(arrNumSort);
+			},
+			gugudan : function () {
+				var arrGugudan = [];
+				for (var i = 2, iMax = 9; i <= iMax; i++) {
+					arrGugudan[i - 2] = [];
+					for (var j = 1, jMax = 9; j <= jMax; j++) {
+						arrGugudan[i - 2][j - 1] = i * j;
+					}
+				}
+				console.log(arrGugudan);
+			},
+			forPush : function () {
+				var arrPush = [];
+				for (var i = 0, max = 10; i < 10; i++) {
+					arrPush.push(i);
+				}
+				console.log(arrPush);
+			},
+			randomPush : function () {
+				var arrRandom = [];
+				for (var i = 0, max = 6; i < max; i++) {
+					ranNum = Math.floor(Math.random() * 6);
+					arrRandom.push(ranNum);
+				}
+				console.log(arrRandom);
+			},
+			randomSplice : function () {
+				var exam7arrLen = exam7arr.length,
+					randomNum = Math.floor(Math.random() * exam7arrLen) - 1;
+				exam7arr.splice(randomNum, 1);
+				console.log(exam7arr);
+			},
+			randomPush2 : function () {
+				var arrRandom2 = [];
+				for (var i = 0, max = 6; i < max;) {
+					ranNum = Math.floor(Math.random() * 6);
+					if ( arrRandom2.indexOf(ranNum) == -1 ) {
+						arrRandom2.push(ranNum);
+						i++;
+					}
+				}
+				console.log(arrRandom2);
+			}
+		};
+		arrayResult.init();
+	});
+})();
+</script>
 </head>
 <body>
 <!-- wrapper [s] -->
