@@ -1,5 +1,9 @@
 # Study
 
+## [Exam4](https://github.com/bluetpark/study/tree/gh-pages/exam4)
+- [LINE PLAY](https://bluetpark.github.io/study/exam4/lineplay/line_play.html)
+- [COCA PLAY](https://bluetpark.github.io/study/exam4/cocaplay/coca.html)
+
 ## [Exam3](https://github.com/bluetpark/study/tree/gh-pages/exam3)
 - [array.html](https://bluetpark.github.io/study/exam3/array.html)
 - [object.html](https://bluetpark.github.io/study/exam3/object.html)
