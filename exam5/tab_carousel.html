@@ -162,6 +162,7 @@ button::-moz-focus-inner{padding:0;border:0}
             this.boxSetting.on('click', 'button', $.proxy(this.testfunc2, this));
         },
         testfunc : function (e) {
+            e.preventDefault();
             var currentItem = $(e.currentTarget);
             this.opt.contId = currentItem.attr('href');
             this.opt.contIdx = $(this.opt.contId).index();
