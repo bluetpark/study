@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>exam - form check</title>
+<style>
+/* temporary css */
+*{margin:0;padding:0}
+body{font-size:14px;font-family:"나눔고딕",NanumGothic,"굴림",Gulim,Sans-serif;color:#da0707;line-height:1.5}
+h1,h2,h3,h4,h5,h6{font-size:14px}
+ul,li{list-style:none}
+button{font-size:14px;font-family:"나눔고딕",NanumGothic,"굴림",Gulim,Sans-serif;line-height:1.5;cursor:pointer}
+button::-moz-focus-inner{padding:0;border:0}
+p{margin-bottom:30px;padding-bottom:10px;border-bottom:2px solid #da0707;font-size:20px}
+#container{width:880px;margin:0 auto;padding:50px 0}
+.box{margin-top:50px;font-size:0}
+.box a{color:#da0707;text-decoration:none}
+.box:first-child{margin-top:0}
+.box1{position:relative}
+.box1 label{position:relative;padding-left:44px;font-size:16px;line-height:32px}
+.chk_area{display:inline-block;position:relative;font-size:0}
+.chk_box{display:inline-block;width:34px;height:34px;background:url(img/sp_check.png) no-repeat;background-position:0 0;vertical-align:middle}
+.check_box{position:absolute;left:0;width:34px;height:34px}
+.ipt_chk,.ipt_rdo{position:absolute;width:1px;height:1px;opacity:0}
+.chk_active .chk_box{background-position:-36px 0}
+.ipt_chk:checked + .chk_box{background-position:-36px 0}
+.ipt_chk:focus + .chk_box,.ipt_rdo:focus + .rdo_box{outline:#00FF00 dotted thick}
+.select_box{position:relative;width:200px;background:#fff}
+.select_box>a{display:block;border:1px solid #da0707;padding:5px 10px;font-size:16px}
+.select_box ul{position:absolute;top:100%;left:0;right:0;border:1px solid #da0707;border-width:0 1px;background:#fff}
+.select_box li{border-bottom:1px solid #da0707}
+.select_box li a{display:block;padding:5px 10px;font-size:16px}
+.select_menu{position:relative}
+.select_menu:after{position:absolute;top:14px;right:15px;width:0;height:0;border-top:5px solid red;border-bottom:0 solid transparent;border-right:5px solid transparent;border-left:5px solid  transparent;content:''}
+.select_box.opened{z-index:30}
+.select_box.opened .select_menu:after{top:14px;border-top:0 solid transparent;border-bottom:5px solid red}
+.box2 label{position:relative;padding-left:28px;font-size:16px;line-height:18px}
+.radio_box{display:inline-block;position:relative;margin-right:10px}
+.rdo_box{position:absolute;left:0;width:18px;height:18px;margin-top:2px;background:url(img/sp_radio.png) no-repeat;background-position:0 0;vertical-align:middle}
+.chk_active .rdo_box{background-position:-20px 0}
+.ipt_rdo:checked + .rdo_box{background-position:-20px 0}
+/* //temporary css */
+</style>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrapper">
+    <!-- header [s] -->
+    <div id="header"></div>
+    <!-- header [e] -->
+    <hr />
+    <!-- container [s] -->
+    <div id="container">
+        <div class="box box1">
+            <p>1. 체크박스</p>
+            <div class="check_box chk_active">
+                <input type="checkbox" id="agree_v1" class="ipt_chk">
+                <span class="chk_box"></span>
+            </div>
+            <label for="agree_v1" class="sp">개인정보 수집·이용 및 SMS수신에 동의합니다.</label>
+        </div>
+        <div class="box box1">
+            <p>1-1. 체크박스</p>
+            <div class="check_box">
+                <input type="checkbox" id="agree_v2" class="ipt_chk">
+                <span class="chk_box"></span>
+            </div>
+            <label for="agree_v2" class="sp">두번째 개인정보 수집·이용 및 SMS수신에 동의합니다.</label>
+        </div>
+        <div class="box box1">
+            <p>1-2. 체크박스</p>
+            <div class="check_box chk_active">
+                <input type="checkbox" id="agree_v3" class="ipt_chk">
+                <span class="chk_box"></span>
+            </div>
+            <label for="agree_v3" class="sp">세번째 개인정보 수집·이용 및 SMS수신에 동의합니다.</label>
+        </div>
+        <div class="box box2">
+            <p>2. 라디오버튼</p>
+            <span class="radio_box chk_active">
+                <input type="radio" id="radio1" name="radio1" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio1">라디오1</label>
+            </span>
+            <span class="radio_box">
+                <input type="radio" id="radio2" name="radio1" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio2">라디오2</label>
+            </span>
+        </div>
+        <div class="box box2">
+            <p>2-1. 라디오버튼</p>
+            <span class="radio_box">
+                <input type="radio" id="radio11" name="radio2" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio11">라디오1</label>
+            </span>
+            <span class="radio_box">
+                <input type="radio" id="radio12" name="radio2" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio12">라디오2</label>
+            </span>
+            <span class="radio_box">
+                <input type="radio" id="radio13" name="radio2" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio13">라디오3</label>
+            </span>
+            <span class="radio_box chk_active">
+                <input type="radio" id="radio14" name="radio2" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio14">라디오4</label>
+            </span>
+            <span class="radio_box">
+                <input type="radio" id="radio15" name="radio2" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio15">라디오5</label>
+            </span>
+        </div>
+        <div class="box box3">
+            <p>3. 셀렉트박스</p>
+            <div class="select_box">
+                <a href="javascript:;" class="select_menu">선택</a>
+                <ul style="display:none;">
+                <li><a href="#">메뉴 1</a></li>
+                <li><a href="#">메뉴 2</a></li>
+                <li><a href="#">메뉴 3</a></li>
+                <li><a href="#">메뉴 4</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="box box3">
+            <p>3-1. 셀렉트박스</p>
+            <div class="select_box">
+                <a href="javascript:;" class="select_menu">선택</a>
+                <ul style="display:none;">
+                <li><a href="#">메뉴 1</a></li>
+                <li><a href="#">메뉴 2</a></li>
+                <li><a href="#">메뉴 3</a></li>
+                <li><a href="#">메뉴 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- container [e] -->
+    <hr />
+    <!-- footer [s] -->
+    <div id="footer"></div>
+    <!-- footer [e] -->
+<!-- [ Javascript Area ] -->
+<!-- Libs -->
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+(function (win, $) {
+    'use strict';
+
+    var ui = ui || {};
+
+    ui.chkBox = function (selector) {
+        this.init(selector);
+    }
+    ui.chkBox.prototype = {
+        selector : null,
+        init : function (selector) {
+            this.selector = selector;
+            this.setElements(selector);
+            this.default(selector);
+            this.bindEvents(selector);
+        },
+        setElements : function () {
+            this.checkbox = $(this.selector); // 페이지 내 모든 체크박스(라디오버튼) UI
+            this.checkboxInp = this.checkbox.find('input'); // 체크박스(라디오버튼) UI 안의 input, label을 클릭해도 change 되는것은 input이므로 input만 선택
+        },
+        default : function () {
+            this.checkbox.each(function (i) { // 체크박스(라디오버튼) UI마다
+                // chk_active 클래스값을 구해서 input에 checked 값을 셋팅
+                $(this).hasClass('chk_active') ? $(this).find('input').prop('checked', true) : $(this).find('input').prop('checked', false);
+            })
+        },
+        bindEvents : function () {
+            this.checkboxInp.on('change', $.proxy(this.toggleChkBox, this)); // input이 change 될 때에 이벤트를 걸어 줌
+        },
+        toggleChkBox : function () {
+            var $currChkBox = $(event.currentTarget);
+            if (this.selector === '.radio_box') {
+                // 선택한 라디오버튼 UI에 chk_active 클래스를 추가, 이 외에 나머지 라디오버튼에서 chk_active 클래스 제거
+                $currChkBox.parent().addClass('chk_active').siblings().removeClass('chk_active')
+            } else {
+                // checked 값이 true일 때 체크박스 UI에 chk_active 클래스를 추가, false일 때 클래스 제거
+                // 기본 기능인 checked를 true, false로 조작할 필요는 없음
+                $currChkBox.prop('checked') ? $currChkBox.parent().addClass('chk_active') : $currChkBox.parent().removeClass('chk_active');
+            }
+        }
+    }
+
+    ui.selBox = function () {
+        this.init();
+    }
+    ui.selBox.prototype = {
+        opt : {
+            currSelectbox : null,
+            currSelectMenu : null,
+            currSelectList : null
+        },
+        init : function () {
+            this.setElements();
+            this.bindEvents();
+        },
+        setElements : function () {
+            this.allSelectbox = $('.select_box');
+            this.allSelectMenu = this.allSelectbox.find('.select_menu');
+            this.allSelectList = this.allSelectbox.find('ul');
+        },
+        bindEvents : function () {
+            this.allSelectMenu.on('click', $.proxy(this.toggleSelect, this));
+            this.allSelectList.on('click', 'a', $.proxy(this.selectItem, this)); // 이벤트 위임, 목록의 a에만 이벤트를 건다
+        },
+        toggleSelect : function (e) {
+            e.preventDefault(); // a 요소로 되어있기 때문에, 페이지에 스크롤이 발생하는 경우 클릭시 페이지 상단으로 올라가는 기본동작을 막는다
+            // this.allSelectList를 slideToggle() 시키는 경우 페이지 내 모든 this.allSelectList에 해당하는 요소가 작동함
+            // 그러므로 클릭한 .select_menu를 기준으로 부모와 리스트를 찾아 상태를 변환해줘야 원하는 셀렉트박스만 조작 됨
+            this.opt.currSelectMenu = $(e.currentTarget); // 선택한 .select_menu 저장
+            this.opt.currSelectbox = this.opt.currSelectMenu.parent(); // 선택한 .select_menu를 기준으로 부모요소 저장 (.select_box)
+            this.opt.currSelectList = this.opt.currSelectbox.find('ul'); // 선택한 .select_box를 기준으로 목록 저장
+            this.opt.currSelectbox.toggleClass('opened'); // .opened 클래스 토글 처리
+            this.opt.currSelectList.slideToggle(150); // 슬라이드 토글 처리
+        },
+        selectItem : function (e) {
+            e.preventDefault(); // a 요소로 되어있기 때문에, 페이지에 스크롤이 발생하는 경우 클릭시 페이지 상단으로 올라가는 기본동작을 막는다
+            var selectedItem = $(e.currentTarget), // 셀렉트 목록 중 선택한 아이템 저장
+                selectedItemTxt = selectedItem.text(); // 선택한 아이템의 text 저장
+            this.opt.currSelectMenu.text(selectedItemTxt); // 텍스트를 .select_menu에 뿌려주고
+            this.opt.currSelectList.slideUp(150); // 목록을 슬라이드업 시켜 닫아주고
+            this.opt.currSelectbox.removeClass('opened'); // .opened 클래스를 제거
+        }
+
+    }
+
+    $(function () {
+        var chkbox = new ui.chkBox('.check_box');
+        var rdobox = new ui.chkBox('.radio_box'); // 체크박스와 공통으로 사용 가능, 선택자를 집어넣어서 구분하고 toggleChkBox 이벤트 내에서 동작 분기
+        var select = new ui.selBox();
+    });
+})(window, window.jQuery);
+</script>
+</div>
+</body>
+</html>
