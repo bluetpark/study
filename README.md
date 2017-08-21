@@ -5,10 +5,10 @@
 ㄴ 소스 : https://github.com/bluetpark/study/blob/gh-pages/exam7/index.html
 
 ## [Exam6](https://github.com/bluetpark/study/tree/gh-pages/exam6)
-- [form check](https://bluetpark.github.io/study/exam6/form_check.html)
-ㄴ 소스 : https://github.com/bluetpark/study/blob/gh-pages/exam6/form_check.html
-- [sort](https://bluetpark.github.io/study/exam6/sort.html)
-ㄴ 소스 : https://github.com/bluetpark/study/blob/gh-pages/exam6/sort.html
+- [form check](https://bluetpark.github.io/study/exam6/form_check.html)    
+ㄴ https://github.com/bluetpark/study/blob/gh-pages/exam6/form_check.html
+- [sort](https://bluetpark.github.io/study/exam6/sort.html)    
+ㄴ https://github.com/bluetpark/study/blob/gh-pages/exam6/sort.html
 
 ## [Exam5](https://github.com/bluetpark/study/tree/gh-pages/exam5)
 - [layerPop.html](https://bluetpark.github.io/study/exam5/layerPop.html)
