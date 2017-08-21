@@ -1,7 +1,7 @@
 # Study
 
 ## [Exam7](https://github.com/bluetpark/study/tree/gh-pages/exam7)
-- [form check](https://bluetpark.github.io/study/exam7/index.html)
+- [sticky](https://bluetpark.github.io/study/exam7/index.html)    
 ㄴ 소스 : https://github.com/bluetpark/study/blob/gh-pages/exam7/index.html
 
 ## [Exam6](https://github.com/bluetpark/study/tree/gh-pages/exam6)
