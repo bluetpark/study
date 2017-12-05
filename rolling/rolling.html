@@ -10,7 +10,7 @@
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,table,th,td,form,fieldset,legend,textarea,input,select,textarea,button,article,aside,dialog,footer,header,section,footer,nav,figure,main{margin:0;padding:0}
 article,aside,dialog,footer,header,section,footer,nav,figure,main{display:block}
 html,body{height:100%;-webkit-text-size-adjust:none;-ms-text-size-adjust:none}
-body,input,select,textarea,button{font-family:'Apple SD Gothic Neo', '돋움', Dotum, sans-serif; font-size:12px} 
+body,input,select,textarea,button{font-family:'Apple SD Gothic Neo', '돋움', Dotum, sans-serif; font-size:12px}
 fieldset,li,img{border:0;vertical-align:top}
 ul,ol{list-style:none}
 button{overflow:visible;border:0;background-color:transparent;cursor:pointer}
@@ -27,9 +27,11 @@ table{border-collapse:collapse;border-spacing:0}
 .nav_inner .nav li{float:left;margin-right:4px}
 .nav_inner .nav li a{display:block;padding:4px 8px;background:rgba(255,0,0,.3)}
 
-.realtime{position:absolute;right:0;top:8px;border:1px solid;width:200px;height:20px;overflow:hidden;}
+.realtime{position:absolute;right:0;top:8px;border:1px solid;width:200px;height:20px;overflow:hidden;background:#fff;}
 .realtime ol{padding-left:4px;font-size:17px;background:#fff;}
-.realtime li{height:20px;line-height:1.2em;}
+.realtime li{position:relative;width:100%;height:20px;line-height:1.2em;}
+.realtime li.current{font-weight:bold;}
+.realtime li a{display:inline-block;width:100%;color:#333}
 .realtime.pop{height:auto;overflow:visible;}
 </style>
 </head>
@@ -46,23 +48,103 @@ table{border-collapse:collapse;border-spacing:0}
 			</div>
 			<div id="realtime" class="realtime">
 				<ol>
-					<li>1. 방탄소년단</li>
-					<li>2. 인천공항 리무진버스</li>
-					<li>3. 평창 롱패딩</li>
-					<li>4. 귀순병사</li>
-					<li>5. 슈주 롱패딩</li>
-					<li>6. 역모</li>
-					<li>7. 마동석</li>
-					<li>8. 이번 생은 처음이라</li>
-					<li>9. 영화순위</li>
-					<li>10. 국세청홈택스</li>
+					<li><a href="#">1. 방탄소년단</a></li>
+					<li><a href="#">2. 인천공항 리무진버스</a></li>
+					<li><a href="#">3. 평창 롱패딩</a></li>
+					<li><a href="#">4. 귀순병사</a></li>
+					<li><a href="#">5. 슈주 롱패딩</a></li>
+					<li><a href="#">6. 역모</a></li>
+					<li><a href="#">7. 마동석</a></li>
+					<li><a href="#">8. 이번 생은 처음이라</a></li>
+					<li><a href="#">9. 영화순위</a></li>
+					<li><a href="#">10. 국세청홈택스</a></li>
 				</ol>
 			</div>
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-latest.js"></script>
 	<script>
-		
+		/*
+		### UI 요구사항
+
+		1. 1위부터 10위까지의 항목이 차례로 나타나며, 10위 다음에는 다시 1위가 나타납니다.(*)
+		2. 항목이 바뀔 때는 아래에서 위로 부드럽게 변경됩니다.(*)
+		3. 실시간 상승 검색어에 마우스를 오버하면 전체 순위 목록이 나타납니다.
+		4. 전체 순위 목록 중 마우스를 오버했을 때 롤링이 중단된 항목을 굵게 표시합니다.
+		5. 전체 순위 목록 내부에 마우스를 오버하고 있을 때 전체 순위 목록이 계속 보이도록 유지합니다.
+		6. 전체 순위 목록 상태에서 마우스를 바깥으로 이동하면 전체 순위목록이 사라지고, 롤링이 중단된 항목에서 다시 롤링을 시작합니다.​
+		​
+		(*) 표시 항목은 필수 구현, 나머지 항목은 연구/토론
+		*/
+
+		var ui = ui || {};
+		ui.view = ui.view || {};
+
+		ui.view.realtime = (function () {
+			this.init();
+		});
+
+		ui.view.realtime.prototype = {
+			init : function () {
+				this._assignElements();
+				this._initSet();
+				this._attachEventHandlers();
+			},
+			_assignElements : function () {
+				this._welWrap = $('#realtime');
+				this._welContainer = this._welWrap.find('ol');
+				this._welItems = this._welContainer.find('li');
+			},
+			_initSet : function () {
+				this._itemsH = this._welItems.height();
+				this._itemsLen = this._welItems.length;
+				this._containerH = this._itemsH * this._itemsLen;
+				this._welItems.first().addClass('current');
+				this._welOld = null;
+				this._welCurrent = null;
+				this._timer = null;
+				this._nDelay = 1500;
+				this._nDuration = 500;
+				this._rollingReady();
+			},
+			_attachEventHandlers : function () {
+				var oSelf = this;
+				oSelf._timer = setTimeout(function () { oSelf._rolling() }, oSelf._nDelay);
+				oSelf._welWrap
+					.on('mouseenter', function () {
+						clearTimeout(oSelf._timer);
+						oSelf._welContainer.find(':animated').stop();
+						oSelf._welItems.removeAttr('style');
+						oSelf._welWrap.addClass('pop');
+					})
+					.on('mouseleave', function () {
+						setTimeout( function () {
+							oSelf._timer = setTimeout(function () { oSelf._rolling() }, oSelf._nDelay);
+							oSelf._rollingReady();
+							oSelf._welWrap.removeClass('pop');
+						}, 300);
+					})
+			},
+			_rollingReady : function () {
+				this._welItems.css({ 'position' : 'absolute', 'top' : this._itemsH }).siblings('.current').css({ 'top' : 0 }).next().addClass('next');
+				this._welCurrent = this._welItems.siblings('.current');
+			},
+			_rolling : function () {
+				var oSelf = this;
+				oSelf._welCurrent.stop().animate({ 'top' : -(oSelf._itemsH) }, oSelf._nDuration).siblings('.next').stop().animate({ 'top' : 0 }, oSelf._nDuration, function () {
+					oSelf._welOld = oSelf._welCurrent;
+					oSelf._welCurrent = ( oSelf._welOld.next().length === 0 ) ? oSelf._welItems.eq(0) : oSelf._welOld.next() ;
+					oSelf._welOld.css({ 'top' : '20px' }).removeClass();
+					oSelf._welCurrent.removeClass().addClass('current');
+					( oSelf._welCurrent.next().length === 0) ? oSelf._welItems.eq(0).addClass('next') : oSelf._welCurrent.next().addClass('next') ;
+					oSelf._timer = setTimeout(function () { oSelf._rolling() }, oSelf._nDelay);
+				});
+			}
+		}
+
+		$(function () {
+			var realtime = new ui.view.realtime();
+		})
 	</script>
 </body>
 </html>
